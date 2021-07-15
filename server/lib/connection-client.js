@@ -204,11 +204,11 @@ class ConnectionClient {
         // uses pre-existing connection to run query, and keeps connection open
         // lastActivityAt is updated both before and after query (the query could take a while)
         this.lastActivityAt = new Date();
-        results = await this.client.runQuery(query);
+        results = await this.client.runQuery(query, user);
         this.lastActivityAt = new Date();
       } else {
         // Opens a new connection to db, runs query, then closes connection
-        results = await driver.runQuery(query, connection);
+        results = await driver.runQuery(query, connection, user);
       }
     } catch (error) {
       // It is logged INFO because it isn't necessarily a server/application error
